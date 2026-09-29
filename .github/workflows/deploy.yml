@@ -16,3 +16,25 @@ jobs:
 
         - name: Mock - Configure AWS credentials
           run: echo "aws-configuration Test"
+
+        - name: Mock - Login to Docker
+          run: echo "Docker login"
+
+        - name: Mock - Build Docker Image
+          run : echo "Docker build"
+
+        - name: Mock - Push image to ECR
+          id : build
+          run : echo "Docker push"
+
+    mock-deploy:
+      needs: mock-build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Mock - SSH into EC2 and redeploy
+          run: |
+            echo "docker pull house-preiction-model"
+            echo "docker stop"
+            echo "docker rm"
+            echo "docker run"
+            echo "Public ip : 56.7.7.7:8000"
