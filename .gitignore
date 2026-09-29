@@ -1,0 +1,15 @@
+.shalu/
+.venv/
+__pycache__
+*.__pyc
+
+mlflow.db
+mlruns/
+mlartifacts/
+
+.env
+.csv
+
+.dist
+.vscode
+.DS_Store

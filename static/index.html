@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HousePrice AI | House Price Predictor</title>
+
+    <meta
+        name="description"
+        content="AI-powered house price prediction using machine learning."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="container nav-content">
+
+            <a href="/" class="brand">
+                <div class="brand-icon">⌂</div>
+
+                <div>
+                    <span class="brand-name">HousePrice</span>
+                    <span class="brand-ai">AI</span>
+                </div>
+            </a>
+
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                ML Model Online
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- Hero -->
+    <main>
+
+        <section class="hero">
+            <div class="container hero-grid">
+
+                <div class="hero-content">
+
+                    <div class="eyebrow">
+                        <span>✦</span>
+                        AI-POWERED REAL ESTATE
+                    </div>
+
+                    <h1>
+                        Discover the
+                        <span>value</span>
+                        of your home.
+                    </h1>
+
+                    <p>
+                        Get an instant estimated property value using our
+                        machine-learning house price prediction model.
+                    </p>
+
+                    <div class="hero-features">
+                        <div class="hero-feature">
+                            <span class="feature-icon">⚡</span>
+                            <div>
+                                <strong>Instant</strong>
+                                <small>Prediction</small>
+                            </div>
+                        </div>
+
+                        <div class="hero-feature">
+                            <span class="feature-icon">◎</span>
+                            <div>
+                                <strong>AI Powered</strong>
+                                <small>ML Model</small>
+                            </div>
+                        </div>
+
+                        <div class="hero-feature">
+                            <span class="feature-icon">🔒</span>
+                            <div>
+                                <strong>Private</strong>
+                                <small>Your data</small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Prediction Card -->
+                <div class="prediction-card">
+
+                    <div class="card-header">
+                        <div>
+                            <span class="card-label">PROPERTY ESTIMATOR</span>
+                            <h2>Enter property details</h2>
+                        </div>
+
+                        <div class="card-icon">⌂</div>
+                    </div>
+
+
+                    <form id="predictionForm">
+
+                        <div class="form-group full">
+                            <label for="sqft">
+                                Property Size
+                                <span>Square Feet</span>
+                            </label>
+
+                            <div class="input-wrapper">
+                                <input
+                                    type="number"
+                                    id="sqft"
+                                    name="sqft"
+                                    placeholder="e.g. 1800"
+                                    min="1"
+                                    max="20000"
+                                    step="1"
+                                    required
+                                >
+                                <span class="input-unit">sq ft</span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="bedrooms">Bedrooms</label>
+
+                                <div class="input-wrapper">
+                                    <input
+                                        type="number"
+                                        id="bedrooms"
+                                        name="bedrooms"
+                                        placeholder="3"
+                                        min="1"
+                                        max="20"
+                                        step="1"
+                                        required
+                                    >
+                                    <span class="input-unit">beds</span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="bathrooms">Bathrooms</label>
+
+                                <div class="input-wrapper">
+                                    <input
+                                        type="number"
+                                        id="bathrooms"
+                                        name="bathrooms"
+                                        placeholder="2"
+                                        min="1"
+                                        max="200"
+                                        step="1"
+                                        required
+                                    >
+                                    <span class="input-unit">baths</span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="age_years">Property Age</label>
+
+                                <div class="input-wrapper">
+                                    <input
+                                        type="number"
+                                        id="age_years"
+                                        name="age_years"
+                                        placeholder="5"
+                                        min="1"
+                                        max="10"
+                                        step="1"
+                                        required
+                                    >
+                                    <span class="input-unit">years</span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="garage">Garage</label>
+
+                                <div class="input-wrapper">
+                                    <input
+                                        type="number"
+                                        id="garage"
+                                        name="garage"
+                                        placeholder="2"
+                                        min="0"
+                                        max="20"
+                                        step="1"
+                                        required
+                                    >
+                                    <span class="input-unit">cars</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="label-row">
+                                <label for="location_score">
+                                    Location Score
+                                </label>
+
+                                <span
+                                    id="locationValue"
+                                    class="score-value"
+                                >
+                                    5 / 10
+                                </span>
+                            </div>
+
+                            <input
+                                type="range"
+                                id="location_score"
+                                name="location_score"
+                                min="1"
+                                max="10"
+                                value="5"
+                                step="1"
+                            >
+
+                            <div class="range-labels">
+                                <span>1 · Less desirable</span>
+                                <span>10 · Premium</span>
+                            </div>
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            id="predictButton"
+                            class="predict-button"
+                        >
+                            <span class="button-text">
+                                Predict House Price
+                            </span>
+
+                            <span class="button-arrow">→</span>
+
+                            <span class="loader"></span>
+                        </button>
+
+                    </form>
+
+
+                    <!-- Error -->
+                    <div
+                        id="errorMessage"
+                        class="message error-message"
+                    ></div>
+
+
+                    <!-- Result -->
+                    <div
+                        id="result"
+                        class="result-panel"
+                    >
+
+                        <div class="result-top">
+                            <span>ESTIMATED PROPERTY VALUE</span>
+
+                            <span class="result-check">✓</span>
+                        </div>
+
+                        <div
+                            id="predictedPrice"
+                            class="predicted-price"
+                        >
+                            $0
+                        </div>
+
+                        <p>
+                            This estimate was generated by the
+                            HousePrice AI machine-learning model.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- How it works -->
+        <section class="how-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span>HOW IT WORKS</span>
+                    <h2>Three simple steps</h2>
+                    <p>
+                        Get a machine-learning based estimate in seconds.
+                    </p>
+                </div>
+
+
+                <div class="steps">
+
+                    <div class="step">
+                        <div class="step-number">01</div>
+
+                        <div>
+                            <h3>Enter details</h3>
+                            <p>
+                                Provide the size, rooms, age, garage
+                                and location information.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="step">
+                        <div class="step-number">02</div>
+
+                        <div>
+                            <h3>AI analysis</h3>
+                            <p>
+                                Your property data is processed by
+                                the trained ML prediction model.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="step">
+                        <div class="step-number">03</div>
+
+                        <div>
+                            <h3>Get estimate</h3>
+                            <p>
+                                Receive an estimated house value
+                                instantly.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div>
+                <strong>HousePrice AI</strong>
+                <span>Machine Learning House Price Predictor</span>
+            </div>
+
+            <div class="footer-health">
+                <span class="status-dot"></span>
+                API Connected
+            </div>
+
+        </div>
+
+    </footer>
+
+</div>
+
+
+<script>
+
+    const form = document.getElementById("predictionForm");
+    const predictButton = document.getElementById("predictButton");
+    const result = document.getElementById("result");
+    const predictedPrice = document.getElementById("predictedPrice");
+    const errorMessage = document.getElementById("errorMessage");
+
+    const locationSlider =
+        document.getElementById("location_score");
+
+    const locationValue =
+        document.getElementById("locationValue");
+
+
+    // Location score display
+    locationSlider.addEventListener("input", () => {
+        locationValue.textContent =
+            `${locationSlider.value} / 10`;
+    });
+
+
+    // Format currency
+    function formatCurrency(value) {
+
+        return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 2
+        }).format(value);
+
+    }
+
+
+    // Show error
+    function showError(message) {
+
+        errorMessage.textContent = message;
+        errorMessage.classList.add("show");
+
+        result.classList.remove("show");
+
+    }
+
+
+    // Prediction
+    form.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        errorMessage.classList.remove("show");
+        result.classList.remove("show");
+
+        predictButton.classList.add("loading");
+        predictButton.disabled = true;
+
+
+        const data = {
+
+            sqft: Number(
+                document.getElementById("sqft").value
+            ),
+
+            bedrooms: Number(
+                document.getElementById("bedrooms").value
+            ),
+
+            bathrooms: Number(
+                document.getElementById("bathrooms").value
+            ),
+
+            age_years: Number(
+                document.getElementById("age_years").value
+            ),
+
+            garage: Number(
+                document.getElementById("garage").value
+            ),
+
+            location_score: Number(
+                document.getElementById("location_score").value
+            )
+
+        };
+
+
+        try {
+
+            const response = await fetch("/predict", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(data)
+
+            });
+
+
+            const responseData = await response.json();
+
+
+            if (!response.ok) {
+
+                let message = "Unable to calculate prediction.";
+
+                if (responseData.detail) {
+
+                    if (Array.isArray(responseData.detail)) {
+
+                        message = responseData.detail
+                            .map(error => error.msg)
+                            .join(", ");
+
+                    } else {
+
+                        message = responseData.detail;
+
+                    }
+
+                }
+
+                throw new Error(message);
+
+            }
+
+
+            const price = Number(
+                responseData.predicted_price
+            );
+
+
+            predictedPrice.textContent =
+                formatCurrency(price);
+
+            result.classList.add("show");
+
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+
+
+        } catch (error) {
+
+            showError(
+                error.message ||
+                "Something went wrong. Please try again."
+            );
+
+        } finally {
+
+            predictButton.classList.remove("loading");
+            predictButton.disabled = false;
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
