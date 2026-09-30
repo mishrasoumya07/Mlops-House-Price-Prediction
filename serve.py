@@ -10,11 +10,10 @@ from pydantic import BaseModel, Field
 
 BASE_DIR = Path(__file__).resolve().parent
 
-# FIX: Ab database ki jagah direct local folder se model load hoga
-MODEL_URI = f"{BASE_DIR}/house_model"
+# FIX: Pointing to artifacts folder where MLmodel is located
+MODEL_URI = f"{BASE_DIR}/house_model/artifacts"
 FEATURES = ["sqft", "bedrooms", "bathrooms", "age_years", "garage", "location_score"]
 
-# Tracking URI set karne ki line hata di gayi hai
 model = mlflow.sklearn.load_model(MODEL_URI)
 
 app = FastAPI(title="House Price Predictor")
