@@ -1,21 +1,20 @@
-# Base image ko upgrade kiya gaya hai taaki naye packages aasani se install ho sakein
-FROM python:3.11-slim
+FROM python:3.12-slim
 
-# Container ke andar working directory set karein
 WORKDIR /app
 
-# Sabse pehle requirements.txt copy karein taaki Docker cache ka fayda mile
 COPY requirements.txt .
 
-# Pip ko update karein aur dependencies install karein
+# Pip upgrade zaroori hai build errors se bachne ke liye
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Baaki saara project code (serve.py, static folder, mlflow.db) copy karein
-COPY . .
+COPY serve.py .
+COPY static ./static
 
-# Port 8000 open karein
+# Yeh dono add karna sabse important hai trained model load karne ke liye
+COPY mlruns ./mlruns
+COPY mlflow.db .
+
 EXPOSE 8000
 
-# Application start karne ki command
-CMD ["python", "serve.py"]
+CMD ["uvicorn", "serve:app", "--host", "0.0.0.0", "--port", "8000"]
